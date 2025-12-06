@@ -9,17 +9,24 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
   <style>
-    :root {
-      --primary: #2563eb;
-      --primary-soft: rgba(37, 99, 235, 0.08);
-      --accent: #f97316;
-      --bg: #0f172a;
-      --card-bg: #ffffff;
-      --text-main: #0f172a;
-      --text-muted: #64748b;
-      --radius-lg: 18px;
-      --shadow-soft: 0 18px 45px rgba(15, 23, 42, 0.15);
-    }
+<style>
+  :root {
+    --primary: #2563eb;
+    --primary-soft: rgba(37, 99, 235, 0.08);
+    --accent: #f97316;
+    --bg: #0f172a;
+    --card-bg: #ffffff;
+    --text-main: #0f172a;
+    --text-muted: #64748b;
+    --radius-lg: 18px;
+    --shadow-soft: 0 18px 45px rgba(15, 23, 42, 0.15);
+  }
+
+  .company-pill:hover {
+    opacity: 0.8;
+    cursor: pointer;
+  }
+   
 
     * {
       margin: 0;
@@ -661,16 +668,27 @@
             </div>
           </div>
 
-          <div>
-            <span class="label" style="font-size:0.72rem; text-transform:uppercase; letter-spacing:0.12em; color:#9ca3af;">
-              Visiting Companies
-            </span>
-            <div class="company-pills" style="margin-top:0.3rem;">
-              <span class="company-pill">Kaynes Technology</span>
-              <span class="company-pill">Infosys, Mysuru</span>
-              <span class="company-pill">J &amp; Q Spider Technologies</span>
-            </div>
-          </div>
+<div>
+  <span class="label" style="font-size:0.72rem; text-transform:uppercase; letter-spacing:0.12em; color:#9ca3af;">
+    Visiting Companies
+  </span>
+
+  <div class="company-pills" style="margin-top:0.3rem;">
+
+    <a href="https://kaynes.com" target="_blank" class="company-pill" style="text-decoration:none; color:inherit;">
+      Kaynes Technology
+    </a>
+
+    <a href="https://www.infosys.com" target="_blank" class="company-pill" style="text-decoration:none; color:inherit;">
+      Infosys, Mysuru
+    </a>
+
+    <a href="https://www.qspiders.com" target="_blank" class="company-pill" style="text-decoration:none; color:inherit;">
+      J &amp; Q Spider Technologies
+    </a>
+
+  </div>
+</div>
         </aside>
       </div>
     </div>
@@ -683,7 +701,7 @@
         <p class="section-eyebrow">About the Visit</p>
         <h2 class="section-title">Linking Classroom Concepts with Real-World Systems</h2>
         <p class="section-subtitle">
-          This industrial visit is designed to give CSE students a clear picture of
+          This industrial visit is designed to give CSE & AIML students a clear picture of
           how software development, embedded systems, and large-scale IT services are
           executed in professional environments.
         </p>
@@ -1045,14 +1063,13 @@
           <ul class="contact-list">
             <li>
               <span class="contact-label">Staff Coordinator</span><br />
-              <strong>Prof. [Name Here]</strong><br />
-              Phone: +91-XXXXXXXXXX
+              <strong>Dr. [S H Angdi]</strong><br />
+              Phone: +91-9448980874
             </li>
             <li>
               <span class="contact-label">Staff Coordinator</span><br />
-              <strong>Prof. [Name Here]</strong><br />
-              Phone: +91-XXXXXXXXXX
-            </li>
+              <strong>Dr. [Pooja Revankar]</strong><br />
+              Phone: +91-8095844631
           </ul>
         </div>
 
@@ -1060,12 +1077,12 @@
           <h3>Student Representatives</h3>
           <ul class="contact-list">
             <li>
-              <span class="contact-label">Final Year CSE</span><br />
-              <strong>[Student Name]</strong> – +91-XXXXXXXXXX
+              <span class="contact-label">Second Year AIML</span><br />
+              <strong>[Shahid Attar]</strong> – +91-9980296413
             </li>
             <li>
-              <span class="contact-label">Final Year CSE</span><br />
-              <strong>[Student Name]</strong> – +91-XXXXXXXXXX
+              <span class="contact-label">Second Year CSE</span><br />
+              <strong>[Student Name]</strong> – +91-8197745882
             </li>
           </ul>
 
@@ -1079,7 +1096,7 @@
       </div>
 
       <p class="copy">
-        © 2025 CSE & AIML Department, REC Hulkoti. Designed for the 3-Day Industrial Visit.
+        © 2025 CSE & AIML Department, REC Hulkoti. Designed by Shahid Attar for the 3-Day Industrial Visit.
       </p>
     </div>
   </footer>
