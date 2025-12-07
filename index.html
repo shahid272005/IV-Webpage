@@ -25,42 +25,43 @@
       opacity: 0.8;
       cursor: pointer;
     }
+
     /* Popup Modal */
-.modal {
-  display: none;
-  position: fixed;
-  z-index: 9999;
-  padding-top: 60px;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  background-color: rgba(0,0,0,0.85);
-}
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 9999;
+      padding-top: 60px;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0,0,0,0.85);
+    }
 
-.modal-content {
-  margin: auto;
-  display: block;
-  max-width: 90%;
-  max-height: 90%;
-  border-radius: 12px;
-  box-shadow: 0 0 25px rgba(255,255,255,0.3);
-}
+    .modal-content {
+      margin: auto;
+      display: block;
+      max-width: 90%;
+      max-height: 90%;
+      border-radius: 12px;
+      box-shadow: 0 0 25px rgba(255,255,255,0.3);
+    }
 
-/* Close button */
-.close {
-  position: absolute;
-  top: 20px;
-  right: 40px;
-  color: #fff;
-  font-size: 40px;
-  font-weight: bold;
-  cursor: pointer;
-}
-.close:hover {
-  opacity: 0.7;
-}
+    /* Close button */
+    .close {
+      position: absolute;
+      top: 20px;
+      right: 40px;
+      color: #fff;
+      font-size: 40px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .close:hover {
+      opacity: 0.7;
+    }
 
     * {
       margin: 0;
@@ -87,31 +88,47 @@
       padding: 0 1.5rem;
     }
 
-    /* Hero */
+    /* HERO WITH VIDEO BACKGROUND */
     header {
-      /* blue gradient like the screenshot */
-      background: radial-gradient(circle at top left, #38bdf8 0, #1d4ed8 35%, #020617 100%);
+      background: #000;              /* fallback while video loads */
       color: #e5e7eb;
       padding: 1.2rem 0 3rem;
       position: relative;
       overflow: hidden;
     }
 
+    /* Fullscreen background video */
+    .hero-video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 0;
+    }
+
+    /* Gradient / dark overlay over the video */
     header::after {
       content: "";
       position: absolute;
-      inset: 40% -10% -40% 50%;
-      background: radial-gradient(circle, rgba(15, 23, 42, 0.9), transparent 60%);
-      opacity: 0.65;
+      inset: 0;
+      background: radial-gradient(circle at top left, #38bdf8 0, #1d4ed8 35%, #020617 100%);
+      opacity: 0.75;
       pointer-events: none;
+      z-index: 1;
+    }
+
+    /* Make all header content sit above video + overlay */
+    header > .container {
+      position: relative;
+      z-index: 2;
     }
 
     .nav-bar {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      position: relative;
-      z-index: 2;
       margin-bottom: 1.5rem;
     }
 
@@ -156,8 +173,6 @@
       grid-template-columns: 1.1fr 0.9fr;
       gap: 2rem;
       align-items: center;
-      position: relative;
-      z-index: 2;
     }
 
     .badge {
@@ -186,11 +201,11 @@
       margin-bottom: 0.6rem;
     }
 
-    /* gradient TEXT only on the span – no big orange bar */
+    /* gradient TEXT only on the span */
     .hero-title span.highlight {
       background-image: linear-gradient(120deg, #f97316, #facc15);
-      -webkit-background-clip: text; /* for Safari/Chrome */
-      background-clip: text;         /* standard property */
+      -webkit-background-clip: text;
+      background-clip: text;
       color: transparent;
     }
 
@@ -618,6 +633,12 @@
 
   <!-- HERO -->
   <header id="top">
+    <!-- Campus background video: replace src with your actual file -->
+    <video class="hero-video" autoplay muted loop playsinline>
+      <source src="file.mp4" type="video/mp4" />
+      Your browser does not support the video tag.
+    </video>
+
     <div class="container">
       <nav class="nav-bar">
         <div class="brand">
@@ -1110,8 +1131,8 @@
               <span class="contact-label">Staff Coordinator</span><br />
               <strong>
                 <a href="#" class="open-image" data-img="pooja.png">
-                Dr. [Pooja Revankar]
-                </a> 
+                  Dr. [Pooja Revankar]
+                </a>
               </strong><br />
               Phone: +91-8095844631
             </li>
@@ -1133,7 +1154,7 @@
 
           <div class="footer-meta">
             <a class="footer-link" href="https://www.rechulkoti.edu.in/" target="_blank">
-            📍 Rural Engineering College, Hulkoti
+              📍 Rural Engineering College, Hulkoti
             </a>
             <span>•</span>
             <span>Dept. of Computer Science &amp; Engineering</span>
@@ -1147,32 +1168,32 @@
       </p>
     </div>
   </footer>
-        <!-- IMAGE POPUP MODAL -->
-<div id="imageModal" class="modal">
-  <span class="close">&times;</span>
-  <img class="modal-content" id="popupImage">
-</div>
-<script>
-  const modal = document.getElementById("imageModal");
-  const popupImage = document.getElementById("popupImage");
-  const closeBtn = document.querySelector(".close");
 
-  document.querySelectorAll(".open-image").forEach(link => {
-    link.addEventListener("click", function (e) {
-      e.preventDefault();
-      const imgSrc = this.getAttribute("data-img");
-      popupImage.src = imgSrc;
-      modal.style.display = "block";
+  <!-- IMAGE POPUP MODAL -->
+  <div id="imageModal" class="modal">
+    <span class="close">&times;</span>
+    <img class="modal-content" id="popupImage">
+  </div>
+
+  <script>
+    const modal = document.getElementById("imageModal");
+    const popupImage = document.getElementById("popupImage");
+    const closeBtn = document.querySelector(".close");
+
+    document.querySelectorAll(".open-image").forEach(link => {
+      link.addEventListener("click", function (e) {
+        e.preventDefault();
+        const imgSrc = this.getAttribute("data-img");
+        popupImage.src = imgSrc;
+        modal.style.display = "block";
+      });
     });
-  });
 
-  closeBtn.onclick = () => modal.style.display = "none";
+    closeBtn.onclick = () => modal.style.display = "none";
 
-  window.onclick = (event) => {
-    if (event.target === modal) modal.style.display = "none";
-  };
-</script>  
-  
-
+    window.onclick = (event) => {
+      if (event.target === modal) modal.style.display = "none";
+    };
+  </script>
 </body>
 </html>
