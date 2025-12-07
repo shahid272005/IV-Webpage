@@ -25,6 +25,42 @@
       opacity: 0.8;
       cursor: pointer;
     }
+    /* Popup Modal */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  padding-top: 60px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.85);
+}
+
+.modal-content {
+  margin: auto;
+  display: block;
+  max-width: 90%;
+  max-height: 90%;
+  border-radius: 12px;
+  box-shadow: 0 0 25px rgba(255,255,255,0.3);
+}
+
+/* Close button */
+.close {
+  position: absolute;
+  top: 20px;
+  right: 40px;
+  color: #fff;
+  font-size: 40px;
+  font-weight: bold;
+  cursor: pointer;
+}
+.close:hover {
+  opacity: 0.7;
+}
 
     * {
       margin: 0;
@@ -1063,12 +1099,18 @@
           <ul class="contact-list">
             <li>
               <span class="contact-label">Staff Coordinator</span><br />
-              <strong>Dr. [S H Angdi]</strong><br />
+              <strong>
+                <a href="#" class="open-image" data-img="angdi.png">
+                  Dr. [S H Angdi]
+                </a>
+              </strong><br />
               Phone: +91-9448980874
             </li>
             <li>
               <span class="contact-label">Staff Coordinator</span><br />
-              <strong>Dr. [Pooja Revankar]</strong><br />
+              <strong>
+                <a href="#" class="open-image" data-img="pooja.png">
+                Dr. [Pooja Revankar]</strong><br />
               Phone: +91-8095844631
             </li>
           </ul>
@@ -1088,7 +1130,9 @@
           </ul>
 
           <div class="footer-meta">
-            <span>📍 Rural Engineering College, Hulkoti</span>
+            <a class="footer-link" href="https://rec.edu.in" target="_blank">
+            📍 Rural Engineering College, Hulkoti
+            </a>
             <span>•</span>
             <span>Dept. of Computer Science &amp; Engineering</span>
             <span>Dept. of Artificial Intelligence &amp; Machine Learning</span>
@@ -1101,6 +1145,32 @@
       </p>
     </div>
   </footer>
+        <!-- IMAGE POPUP MODAL -->
+<div id="imageModal" class="modal">
+  <span class="close">&times;</span>
+  <img class="modal-content" id="popupImage">
+</div>
+<script>
+  const modal = document.getElementById("imageModal");
+  const popupImage = document.getElementById("popupImage");
+  const closeBtn = document.querySelector(".close");
+
+  document.querySelectorAll(".open-image").forEach(link => {
+    link.addEventListener("click", function (e) {
+      e.preventDefault();
+      const imgSrc = this.getAttribute("data-img");
+      popupImage.src = imgSrc;
+      modal.style.display = "block";
+    });
+  });
+
+  closeBtn.onclick = () => modal.style.display = "none";
+
+  window.onclick = (event) => {
+    if (event.target === modal) modal.style.display = "none";
+  };
+</script>  
+  
 
 </body>
 </html>
