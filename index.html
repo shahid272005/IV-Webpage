@@ -68,6 +68,18 @@
       padding: 0;
       box-sizing: border-box;
     }
+    #video-bg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;  /* IMPORTANT FIX */
+  transform: translate(-50%, -50%);
+  z-index: -1;
+  opacity: 0.35;
+}
 
     body {
       font-family: "Poppins", sans-serif;
