@@ -1486,30 +1486,26 @@
   </footer>
 
   <!-- IMAGE POPUP MODAL -->
-  <div id="imageModal" class="modal">
-    <span class="close">&times;</span>
-    <img class="modal-content" id="popupImage">
-  </div>
-  <script>
-    const modal = document.getElementById("imageModal");
-    const popupImage = document.getElementById("popupImage");
-    const closeBtn = document.querySelector(".close");
+<script>
+  const imageModal = document.getElementById("imageModal");
+  const popupImage = document.getElementById("popupImage");
+  const imageCloseBtn = document.querySelector("#imageModal .close");
 
-    document.querySelectorAll(".open-image").forEach(link => {
-      link.addEventListener("click", function (e) {
-        e.preventDefault();
-        const imgSrc = this.getAttribute("data-img");
-        popupImage.src = imgSrc;
-        modal.style.display = "block";
-      });
+  document.querySelectorAll(".open-image").forEach(link => {
+    link.addEventListener("click", function (e) {
+      e.preventDefault();
+      const imgSrc = this.getAttribute("data-img");
+      popupImage.src = imgSrc;
+      imageModal.style.display = "block";
     });
+  });
 
-    closeBtn.onclick = () => modal.style.display = "none";
+  imageCloseBtn.onclick = () => imageModal.style.display = "none";
 
-    window.onclick = (event) => {
-      if (event.target === modal) modal.style.display = "none";
-    };
-  </script>
+  window.onclick = (event) => {
+    if (event.target === imageModal) imageModal.style.display = "none";
+  };
+</script>
   <script>
   // --- DATA FOR ALL 10 PLACES (EN / HI / KN) ---
 
@@ -1790,7 +1786,7 @@ college curriculum and job-ready competence.`,
   const modalTitle = document.getElementById("placeModalTitle");
   const modalLocation = document.getElementById("placeModalLocation");
   const modalText = document.getElementById("placeModalText");
-  const closeBtn = modalOverlay.querySelector(".place-modal-close");
+  const placeCloseBtn = modalOverlay.querySelector(".place-modal-close");
   const langButtons = modalOverlay.querySelectorAll(".lang-btn");
   const ttsBtn = document.getElementById("ttsBtn");
 
@@ -1831,7 +1827,7 @@ college curriculum and job-ready competence.`,
     });
   });
 
-  closeBtn.addEventListener("click", closePlaceModal);
+  placeCloseBtn.addEventListener("click", closePlaceModal);
 
   modalOverlay.addEventListener("click", (e) => {
     if (e.target === modalOverlay) closePlaceModal();
