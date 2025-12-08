@@ -80,6 +80,113 @@
   z-index: -1;
   opacity: 0.35;
 }
+/* Visiting Sites section */
+.visiting-section {
+  background: #f9fafb;
+  padding: 3rem 0 2.5rem;
+}
+
+.visiting-intro {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.visiting-intro .section-title {
+  margin-bottom: 0.4rem;
+}
+
+.visiting-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  justify-content: center;
+}
+
+.site-pill {
+  padding: 0.35rem 0.9rem;
+  border-radius: 999px;
+  background: #ffffff;
+  border: 1px solid rgba(148, 163, 184, 0.4);
+  font-size: 0.8rem;
+  cursor: pointer;
+  box-shadow: var(--shadow-soft);
+  transition: background 0.18s, color 0.18s, border-color 0.18s, transform 0.18s;
+}
+
+.site-pill:hover {
+  background: #2563eb;
+  color: #eff6ff;
+  border-color: #1d4ed8;
+  transform: translateY(-1px);
+}
+
+/* Site info modal (reuses .modal backdrop) */
+#siteInfoModal .modal-box {
+  background: #020617;
+  color: #e5e7eb;
+  max-width: 560px;
+  margin: 60px auto;
+  padding: 1.4rem 1.6rem 1.2rem;
+  border-radius: 18px;
+  position: relative;
+  box-shadow: 0 25px 70px rgba(15, 23, 42, 0.8);
+}
+
+#siteInfoModal h3 {
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+}
+
+#siteInfoModal p {
+  font-size: 0.9rem;
+  color: #e5e7eb;
+}
+
+/* Language + audio controls */
+.site-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 1rem;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.lang-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.lang-btn {
+  font-size: 0.75rem;
+  padding: 0.3rem 0.8rem;
+  border-radius: 999px;
+  border: 1px solid rgba(148, 163, 184, 0.5);
+  background: rgba(15, 23, 42, 0.9);
+  color: #e5e7eb;
+  cursor: pointer;
+}
+
+.lang-btn.active {
+  background: #2563eb;
+  border-color: #1d4ed8;
+}
+
+#speakBtn {
+  font-size: 0.8rem;
+  padding: 0.35rem 0.9rem;
+  border-radius: 999px;
+  border: none;
+  background: #f97316;
+  color: #111827;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+#speakBtn:hover {
+  background: #fdba74;
+}    
 
     body {
       font-family: "Poppins", sans-serif;
@@ -1067,6 +1174,36 @@
       </div>
     </div>
   </section>
+  <!-- VISITING SITES INFO -->
+<section id="visiting-sites">
+  <div class="container visiting-section">
+    <div class="section-header visiting-intro">
+      <p class="section-eyebrow">Visiting Places & Companies</p>
+      <h2 class="section-title">Know More About Each Stop</h2>
+      <p class="section-subtitle">
+        Tap a place to see a short history and details. Switch language or listen with audio.
+      </p>
+    </div>
+
+    <div class="visiting-pills">
+      <!-- Day 1 -->
+      <button class="site-pill" data-site="kaynes">Kaynes (Mysuru)</button>
+      <button class="site-pill" data-site="infosys">Infosys Campus, Mysuru</button>
+      <button class="site-pill" data-site="krs">KRS Brindavan Garden</button>
+
+      <!-- Day 2 -->
+      <button class="site-pill" data-site="chamundi">Chamundi Hills</button>
+      <button class="site-pill" data-site="lalitha">Lalitha Mahal</button>
+      <button class="site-pill" data-site="palace">Mysore Palace</button>
+      <button class="site-pill" data-site="balmuri">Balmuri Falls</button>
+      <button class="site-pill" data-site="srirangapatna">Srirangapatna</button>
+
+      <!-- Day 3 -->
+      <button class="site-pill" data-site="channapatna">Channapatna</button>
+      <button class="site-pill" data-site="jqspiders">J &amp; Q Spider Technologies</button>
+    </div>
+  </div>
+</section>
 
   <!-- INFO / INSTRUCTIONS -->
   <section id="info">
@@ -1186,6 +1323,23 @@
     <span class="close">&times;</span>
     <img class="modal-content" id="popupImage">
   </div>
+  <!-- SITE INFO POPUP MODAL -->
+<div id="siteInfoModal" class="modal">
+  <div class="modal-box">
+    <span class="close site-close">&times;</span>
+    <h3 id="siteTitle"></h3>
+    <p id="siteDescription"></p>
+
+    <div class="site-actions">
+      <div class="lang-buttons">
+        <button class="lang-btn active" data-lang="en">English</button>
+        <button class="lang-btn" data-lang="hi">हिंदी</button>
+        <button class="lang-btn" data-lang="kn">ಕನ್ನಡ</button>
+      </div>
+      <button id="speakBtn">🔊 Listen</button>
+    </div>
+  </div>
+</div>  
 
   <script>
     const modal = document.getElementById("imageModal");
@@ -1207,5 +1361,168 @@
       if (event.target === modal) modal.style.display = "none";
     };
   </script>
+  <script>
+  // --- DATA FOR ALL VISITING SITES (EN / HI / KN) ---
+  const siteData = {
+    kaynes: {
+      name: "Kaynes Electronics Manufacturing Pvt. Ltd., Mysuru",
+      description: {
+        en: "Kaynes is an electronics manufacturing services (EMS) company in Mysuru. Students can see how industrial PCBs and embedded products are designed, tested and produced in high volume for global customers.",
+        hi: "केन्स इलेक्ट्रॉनिक्स मैन्युफैक्चरिंग प्रा. लि. मैसूरु की एक इलेक्ट्रॉनिक्स मैन्युफैक्चरिंग सर्विसेज (EMS) कंपनी है। यहाँ छात्र देख सकते हैं कि इंडस्ट्रियल PCB और एम्बेडेड प्रोडक्ट्स कैसे डिज़ाइन, टेस्ट और बड़े पैमाने पर तैयार किए जाते हैं।",
+        kn: "ಕೇನ್ಸ್ ಎಲೆಕ್ಟ್ರಾನಿಕ್ಸ್ ಮ್ಯಾನುಫ್ಯಾಕ್ಚರಿಂಗ್ ಪ್ರೈ.ಲಿ. ಮೈಸೂರಿನ EMS (Electronics Manufacturing Services) ಕಂಪನಿಯಾಗಿದೆ. ಇಲ್ಲಿ ಕೈಗಾರಿಕಾ PCB ಗಳು ಮತ್ತು ಎಂಬೆಡೆಡ್ ಉತ್ಪನ್ನಗಳು ಹೇಗೆ ವಿನ್ಯಾಸಗೊಳ್ಳುತ್ತವೆ, ಪರೀಕ್ಷಿಸಲಾಗುತ್ತವೆ ಮತ್ತು ದೊಡ್ಡ ಪ್ರಮಾಣದಲ್ಲಿ ತಯಾರಾಗುತ್ತವೆ ಎಂಬುದನ್ನು ವಿದ್ಯಾರ್ಥಿಗಳು ನೋಡಬಹುದು."
+      }
+    },
+    infosys: {
+      name: "Infosys Global Education Center, Mysuru",
+      description: {
+        en: "The Infosys campus at Mysuru is one of the largest corporate training centres in the world. Fresh graduates from across India are trained here on software engineering, project practices and professional skills.",
+        hi: "मैसूरु का इंफोसिस ग्लोबल एजुकेशन सेंटर दुनिया के सबसे बड़े कॉर्पोरेट ट्रेनिंग कैंपस में से एक है। यहाँ पूरे भारत से आए नए ग्रेजुएट्स को सॉफ्टवेयर इंजीनियरिंग, प्रोजेक्ट प्रैक्टिस और प्रोफेशनल स्किल्स में ट्रेनिंग दी जाती है।",
+        kn: "ಮೈಸೂರಿನ ಇನ್ಫೋಸಿಸ್ ಗ್ಲೋಬಲ್ ಎಡ್ಯುಕೇಶನ್ ಸೆಂಟರ್ ವಿಶ್ವದ ಅತಿ ದೊಡ್ಡ ಕಾರ್ಪೊರೇಟ್ ತರಬೇತಿ ಕೇಂದ್ರಗಳಲ್ಲಿ ಒಂದಾಗಿದೆ. ಇಲ್ಲಿ ಭಾರತದ ವಿಭಿನ್ನ ಭಾಗಗಳಿಂದ ಬಂದ ನೂತನ ಸ್ನಾತಕರಿಗೆ ಸಾಫ್ಟ್‌ವೇರ್ ಎಂಜಿನಿಯರಿಂಗ್, ಪ್ರಾಜೆಕ್ಟ್ ಪ್ರಾಕ್ಟೀಸ್ ಹಾಗೂ ಪ್ರೊಫೆಷನಲ್ ಕೌಶಲ್ಯಗಳಲ್ಲಿ ತರಬೇತಿ ನೀಡಲಾಗುತ್ತದೆ."
+      }
+    },
+    krs: {
+      name: "KRS Brindavan Garden, Mysuru",
+      description: {
+        en: "Brindavan Garden is a famous terraced garden built alongside the Krishnaraja Sagar dam. It is known for its symmetric design, musical fountain show and beautifully lit evenings by the Cauvery river.",
+        hi: "कृष्णराज सागर बाँध के पास बना ब्रिन्दावन गार्डन एक प्रसिद्ध टेरेस्ड गार्डन है। इसकी खासियत सममित डिज़ाइन, म्यूज़िकल फाउंटेन शो और शाम को कावेरी नदी के किनारे होने वाली खूबसूरत लाइटिंग है।",
+        kn: "ಕೃಷ್ಣರಾಜ ಸಾಗರ ಅಣೆಕಟ್ಟಿನ ಪಕ್ಕದಲ್ಲಿ ನಿರ್ಮಿಸಲಾದ ಬೃಂದಾವನ ಗಾರ್ಡನ್ ಪ್ರಸಿದ್ಧ ಟೆರೇಸ್ ತೋಟವಾಗಿದೆ. ಸಮಮಿತ ವಿನ್ಯಾಸ, ಸಂಗೀತ ಕಾರಂಜಿ ಪ್ರದರ್ಶನ ಮತ್ತು ಕಾವೇರಿ ನದಿಯ ತೀರದ ಸುಂದರ ಬೆಳಕು ಅಳಂಕಾರಕ್ಕಾಗಿ ಇದು ಹೆಸರುವಾಸಿಯಾಗಿದೆ."
+      }
+    },
+    chamundi: {
+      name: "Chamundeshwari Betta (Chamundi Hills)",
+      description: {
+        en: "Chamundi Hills is a sacred hill overlooking Mysuru city, home to the Chamundeshwari Temple. The hill offers panoramic views of the city and is an important pilgrimage spot in Karnataka.",
+        hi: "चामुंडी हिल्स मैसूरु शहर के ऊपर स्थित एक पवित्र पहाड़ी है जहाँ प्रसिद्ध चामुंडेश्वरी मंदिर स्थित है। यहाँ से शहर का सुंदर दृश्य दिखाई देता है और यह कर्नाटक का एक महत्वपूर्ण तीर्थ स्थान है।",
+        kn: "ಚಾಮುಂಡಿ ಬೆಟ್ಟ ಮೈಸೂರಿನ ಮೇಲೆ ನೆಲೆಗೊಂಡಿರುವ ಪವಿತ್ರ ಗುಡ್ಡವಾಗಿದ್ದು, ಪ್ರಸಿದ್ಧ ಚಾಮುಂಡೇಶ್ವರಿ ದೇವಿಯ ದೇವಸ್ಥಾನ ಇಲ್ಲಿ ಇದೆ. ಇಲ್ಲಿಿಂದ ಮೈಸೂರಿನ ಸಂಪೂರ್ಣ ನೋಟ ಕಾಣಬಹುದು ಮತ್ತು ಇದು ಕರ್ನಾಟಕದ ಪ್ರಮುಖ ಯಾತ್ರಾ ಕ್ಷೇತ್ರಗಳಲ್ಲಿ ಒಂದಾಗಿದೆ."
+      }
+    },
+    lalitha: {
+      name: "Lalitha Mahal Palace, Mysuru",
+      description: {
+        en: "Lalitha Mahal was built in 1921 for the Maharaja of Mysore as a guest palace for Viceroys and royal visitors. The building, inspired by European architecture, is now a heritage hotel and a popular photo spot.",
+        hi: "ललिता महल को 1921 में मैसूरु के महाराजा ने वायसराय और विशेष मेहमानों के लिए अतिथिगृह के रूप में बनवाया था। यूरोपीय शैली की इस इमारत को अब हेरिटेज होटल में बदला गया है और यह फोटो खिंचवाने के लिए प्रसिद्ध जगह है।",
+        kn: "ಲಲಿತ ಮಹಲ್ ಅನ್ನು 1921ರಲ್ಲಿ ಮೈಸೂರು ಮಹಾರಾಜರು ಬ್ರಿಟಿಷ್ ವೈಸ್ರಾಯರು ಮತ್ತು ರಾಜಮನೆತನದ ಅತಿಥಿಗಳಿಗಾಗಿ ನಿರ್ಮಿಸಿದರು. ಯುರೋಪಿಯನ್ ಶೈಲಿಯ ಈ ಅರಮನೆ ಈಗ ಹೆರಿಟೇಜ್ ಹೋಟೆಲಾಗಿ ರೂಪಾಂತರಗೊಂಡಿದ್ದು, ಫೋಟೋ ತೆಗೆದುಕೊಳ್ಳಲು ಜನಪ್ರಿಯ ಸ್ಥಳವಾಗಿದೆ."
+      }
+    },
+    palace: {
+      name: "Mysore Palace",
+      description: {
+        en: "Mysore Palace, also called Amba Vilas, is the royal residence of the Wadiyar dynasty. Known for its Indo-Saracenic architecture, grand halls and illumination during Dasara, it is one of the most visited monuments in India.",
+        hi: "मैसूर पैलेस, जिसे अम्बा विलास भी कहा जाता है, वाडियार राजवंश का शाही निवास है। इंडो-सरसेनिक वास्तुकला, भव्य दरबार हॉल और दशहरा के समय होने वाली रोशनी के कारण यह भारत के सबसे अधिक देखे जाने वाले स्मारकों में से एक है।",
+        kn: "ಅಂಬಾ ವಿಲಾಸ ಎಂದೂ ಕರೆಯಲಾಗುವ ಮೈಸೂರು ಅರಮನೆ ವಡೇಯಾರ್ ವಂಶದ ರಾಜಮನೆತನವಾಗಿದೆ. ಇಂಡೋ-ಸಾರಸೆನಿಕ್ ಶೈಲಿಯ ವಾಸ್ತು, ಭವ್ಯ ದರ್ಬಾರ್ ಹಾಲ್‌ಗಳು ಮತ್ತು ದಸರಾ ದೀಪಾಲಂಕಾರಕ್ಕಾಗಿ ಇದು ಭಾರತದ ಅತ್ಯಂತ ಹೆಚ್ಚು ಭೇಟಿ ನೀಡಲ್ಪಡುವ ಸ್ಮಾರಕಗಳಲ್ಲಿೊಂದಾಗಿದೆ."
+      }
+    },
+    balmuri: {
+      name: "Balmuri Falls, near Mysuru",
+      description: {
+        en: "Balmuri is a man-made check dam on the Cauvery river that creates a wide, shallow waterfall. It is a popular picnic spot for students and families, with greenery and calm river views.",
+        hi: "बालमुरी कावेरी नदी पर बना एक छोटा चेक डैम है, जहाँ पानी एक चौड़े और कम गहरे जलप्रपात की तरह बहता है। यह छात्रों और परिवारों के लिए पिकनिक मनाने की लोकप्रिय जगह है।",
+        kn: "ಬಾಲ್ಮುರಿ ಕಾವೇರಿ ನದಿಯ ಮೇಲಿನ ಮಾನವ ನಿರ್ಮಿತ ಚೆಕ್ ಡ್ಯಾಂ ಆಗಿದ್ದು, ಇಲ್ಲಿ ನೀರು ಅಗಲ ಮತ್ತು ಆಳ ಕಡಿಮೆ ಇರುವ ಜಲಪಾತದಂತೆ ಹರಿಯುತ್ತದೆ. ಇದು ವಿದ್ಯಾರ್ಥಿಗಳು ಮತ್ತು ಕುಟುಂಬಗಳಿಗಾಗಿ ಜನಪ್ರಿಯ ಪಿಕ್ನಿಕ್ ಸ್ಥಳವಾಗಿದೆ."
+      }
+    },
+    srirangapatna: {
+      name: "Srirangapatna",
+      description: {
+        en: "Srirangapatna is a historic island town on the Cauvery river. It was the capital of Tipu Sultan and Hyder Ali, and is known for Ranganathaswamy Temple, Dariya Daulat Bagh, Gumbaz and many battle sites.",
+        hi: "श्रीनरंगपट्टन कावेरी नदी के बीच स्थित ऐतिहासिक द्वीप शहर है। यह हैदर अली और टीपू सुल्तान की राजधानी रहा है और रंगनाथस्वामी मंदिर, दरिया दौलत बाग, गुम्बज और युद्ध स्थलों के लिए प्रसिद्ध है।",
+        kn: "ಶ್ರೀರಂಗಪಟ್ಟಣ ಕಾವೇರಿ ನದಿಯ ಮಧ್ಯದಲ್ಲಿರುವ ಐತಿಹಾಸಿಕ ದ್ವೀಪ ನಗರ. ಇದು ಹೈದರ ಅಲಿ ಮತ್ತು ಟಿಪ್ಪು ಸುಲ್ತಾನ್‌ರ ರಾಜಧಾನಿಯಾಗಿದ್ದು, ರಂಗನಾಥಸ್ವಾಮಿ ದೇವಾಲಯ, ದರಿಯಾ ದೌಲತ್ ಬಾಗ್, ಗುಂಬಜ್ ಮತ್ತು ಅನೇಕ ಯುದ್ಧ ಕ್ಷೇತ್ರಗಳಿಗಾಗಿ ಪ್ರಸಿದ್ಧವಾಗಿದೆ."
+      }
+    },
+    channapatna: {
+      name: "Channapatna – Toy Town of Karnataka",
+      description: {
+        en: "Channapatna, between Mysuru and Bengaluru, is famous for its traditional wooden lacquered toys. The craft has a GI tag and students can see how eco-friendly toys are turned on lathes and coloured with natural dyes.",
+        hi: "मैसूरु और बेंगलुरु के बीच स्थित चन्नपट्टन पारंपरिक लकड़ी के खिलौनों के लिए प्रसिद्ध है। इस शिल्प को जीआई टैग मिला है और यहाँ पर्यावरण-अनुकूल खिलौने लकड़ी पर लेथ मशीन से बनाकर प्राकृतिक रंगों से रंगे जाते हैं।",
+        kn: "ಮೈಸೂರು ಮತ್ತು ಬೆಂಗಳೂರು ನಡುವೆ ಇರುವ ಚನ್ನಪಟ್ಟಣವು ಸಾಂಪ್ರದಾಯಿಕ ಮರದ ಲಾಕರ್ ಆಟಿಕೆಗಳಿಗಾಗಿ ಪ್ರಸಿದ್ಧ. ಈ ಕರಕುಶಲತೆಗೆ GI ಟ್ಯಾಗ್ ಲಭ್ಯವಾಗಿದೆ ಮತ್ತು ಇಲ್ಲಿ ಪರಿಸರ ಸ್ನೇಹಿ ಆಟಿಕೆಗಳನ್ನು ಲೇತ್ ಯಂತ್ರದಲ್ಲಿ ತಯಾರಿಸಿ ನೈಸರ್ಗಿಕ ಬಣ್ಣಗಳಿಂದ ಬಣ್ಣಿಸಲಾಗುತ್ತದೆ."
+      }
+    },
+    jqspiders: {
+      name: "J & Q Spider Technologies, Bengaluru",
+      description: {
+        en: "J & Q Spiders is a well-known training and placement organisation for software testing and development. Students can understand how industry-oriented training, mock interviews and skill building are conducted for IT jobs.",
+        hi: "जे & क्यू स्पाइडर्स सॉफ्टवेयर टेस्टिंग और डेवलपमेंट के लिए प्रसिद्ध ट्रेनिंग और प्लेसमेंट संस्थान है। यहाँ छात्र देख सकते हैं कि आईटी जॉब्स के लिए इंडस्ट्री-ओरिएंटेड ट्रेनिंग, मॉक इंटरव्यू और स्किल बिल्डिंग कैसे कराई जाती है।",
+        kn: "ಜೆ & ಕ್ಯೂ ಸ್ಪೈಡರ್ಸ್ ಸಾಫ್ಟ್‌ವೇರ್ ಟೆಸ್ಟಿಂಗ್ ಮತ್ತು ಡೆವಲಪ್‌ಮೆಂಟ್ ಕ್ಷೇತ್ರದ ಪ್ರಸಿದ್ಧ ತರಬೇತಿ ಹಾಗೂ ಪ್ಲೇಸ್ಮೆಂಟ್ ಸಂಸ್ಥೆಯಾಗಿದೆ. ಇಲ್ಲಿ ಐಟಿ ಉದ್ಯೋಗಗಳಿಗೆ ಕೈಗಾರಿಕಾ ಅವಶ್ಯಕತೆಗಳಿಗೆ ತಕ್ಕ ತರಬೇತಿ, ಮಾಕ್ ಇಂಟರ್ವ್ಯೂ ಮತ್ತು ಕೌಶಲ್ಯ ವಿಕಸನ ಹೇಗೆ ನಡೆಯುತ್ತದೆ ಎಂಬುದನ್ನು ವಿದ್ಯಾರ್ಥಿಗಳು ಅರಿತುಕೊಳ್ಳಬಹುದು."
+      }
+    }
+  };
+
+  // --- ELEMENT REFERENCES ---
+  const siteModal = document.getElementById("siteInfoModal");
+  const siteTitleEl = document.getElementById("siteTitle");
+  const siteDescEl = document.getElementById("siteDescription");
+  const siteCloseBtn = document.querySelector("#siteInfoModal .site-close");
+  const langButtons = document.querySelectorAll("#siteInfoModal .lang-btn");
+  const speakBtn = document.getElementById("speakBtn");
+
+  let currentSiteKey = null;
+  let currentLang = "en";
+
+  // Open modal when a pill is clicked
+  document.querySelectorAll(".site-pill").forEach(btn => {
+    btn.addEventListener("click", () => {
+      currentSiteKey = btn.dataset.site;
+      currentLang = "en"; // default to English every time
+      langButtons.forEach(b => b.classList.toggle("active", b.dataset.lang === "en"));
+      updateSiteModal();
+      siteModal.style.display = "block";
+    });
+  });
+
+  // Change language
+  langButtons.forEach(btn => {
+    btn.addEventListener("click", () => {
+      currentLang = btn.dataset.lang;
+      langButtons.forEach(b => b.classList.toggle("active", b === btn));
+      updateSiteModal();
+    });
+  });
+
+  function updateSiteModal() {
+    const info = siteData[currentSiteKey];
+    if (!info) return;
+    siteTitleEl.textContent = info.name;
+    const text = info.description[currentLang] || info.description.en;
+    siteDescEl.textContent = text;
+  }
+
+  // Close modal
+  function closeSiteModal() {
+    siteModal.style.display = "none";
+    if ("speechSynthesis" in window) {
+      window.speechSynthesis.cancel();
+    }
+  }
+
+  siteCloseBtn.addEventListener("click", closeSiteModal);
+
+  window.addEventListener("click", (e) => {
+    if (e.target === siteModal) {
+      closeSiteModal();
+    }
+  });
+
+  // --- TEXT TO SPEECH USING WEB SPEECH API ---
+  const langToVoice = {
+    en: "en-IN",
+    hi: "hi-IN",
+    kn: "kn-IN"
+  };
+
+  speakBtn.addEventListener("click", () => {
+    const text = siteDescEl.textContent.trim();
+    if (!text) return;
+
+    if (!("speechSynthesis" in window)) {
+      alert("Text-to-speech is not supported in this browser.");
+      return;
+    }
+
+    window.speechSynthesis.cancel();
+
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = langToVoice[currentLang] || "en-US";
+    window.speechSynthesis.speak(utterance);
+  });
+</script>
 </body>
 </html>
