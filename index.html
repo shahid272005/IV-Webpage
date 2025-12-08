@@ -80,6 +80,214 @@
   z-index: -1;
   opacity: 0.35;
 }
+/* Visiting Places section */
+.visiting-section {
+  background: #f3f4f6;
+  padding: 3rem 0 3.5rem;
+}
+
+.visiting-section .section-eyebrow {
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--primary);
+  text-align: center;
+  margin-bottom: 0.4rem;
+}
+
+.visiting-section .section-title {
+  text-align: center;
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin-bottom: 0.4rem;
+}
+
+.visiting-section .section-subtitle {
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  max-width: 560px;
+  margin: 0.4rem auto 2rem;
+}
+
+.place-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 1.3rem;
+  max-width: 1040px;
+  margin: 0 auto;
+}
+
+.place-card {
+  border: none;
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 0.8rem 0.9rem 1rem;
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.12);
+  cursor: pointer;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: transform 0.16s ease, box-shadow 0.16s ease;
+}
+
+.place-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.2);
+}
+
+.place-thumb {
+  width: 100%;
+  border-radius: 16px;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  margin-bottom: 0.65rem;
+}
+
+.place-name-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.35rem 0.85rem;
+  border-radius: 999px;
+  background: #eff6ff;
+  color: #1d4ed8;
+  font-size: 0.8rem;
+  font-weight: 600;
+  margin-bottom: 0.15rem;
+}
+
+.place-location-mini {
+  font-size: 0.75rem;
+  color: #6b7280;
+}
+
+/* --- Popup modal for places --- */
+
+.place-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.85);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.place-modal-overlay.active {
+  display: flex;
+}
+
+.place-modal {
+  background: #ffffff;
+  border-radius: 20px;
+  max-width: 720px;
+  width: 92%;
+  max-height: 90vh;
+  overflow: auto;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+  position: relative;
+}
+
+.place-modal-header-image {
+  width: 100%;
+  max-height: 240px;
+  object-fit: cover;
+  border-radius: 20px 20px 0 0;
+}
+
+.place-modal-body {
+  padding: 1.4rem 1.5rem 1.7rem;
+}
+
+.place-modal-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 0.15rem;
+}
+
+.place-location-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.8rem;
+  padding: 0.15rem 0.6rem;
+  border-radius: 999px;
+  background: #eff6ff;
+  color: #1f2937;
+  margin-bottom: 0.8rem;
+}
+
+.place-modal-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 0.9rem;
+}
+
+.lang-switch {
+  display: inline-flex;
+  gap: 0.35rem;
+}
+
+.lang-btn {
+  border-radius: 999px;
+  border: 1px solid #d1d5db;
+  background: #f9fafb;
+  font-size: 0.78rem;
+  padding: 0.25rem 0.65rem;
+  cursor: pointer;
+}
+
+.lang-btn.active {
+  background: #2563eb;
+  color: #f9fafb;
+  border-color: #1d4ed8;
+}
+
+.tts-btn {
+  border-radius: 999px;
+  border: none;
+  background: #f97316;
+  color: #111827;
+  font-size: 0.8rem;
+  padding: 0.35rem 0.8rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.tts-btn:hover {
+  background: #fbbf24;
+}
+
+.place-modal-text {
+  font-size: 0.9rem;
+  color: #374151;
+  line-height: 1.6;
+}
+
+.place-modal-close {
+  position: absolute;
+  top: 10px;
+  right: 14px;
+  border: none;
+  background: transparent;
+  color: #f9fafb;
+  font-size: 32px;
+  cursor: pointer;
+}
+
+/* Responsive tweak */
+@media (max-width: 640px) {
+  .place-modal-body {
+    padding-inline: 1.1rem;
+  }
+}    
     body {
       font-family: "Poppins", sans-serif;
       background: #f1f5f9;
@@ -1066,6 +1274,104 @@
       </div>
     </div>
   </section>
+  <!-- VISITING PLACES & COMPANIES -->
+<section id="visiting-places" class="visiting-section">
+  <div class="container">
+    <p class="section-eyebrow">Visiting Places & Companies</p>
+    <h2 class="section-title">Know More About Each Stop</h2>
+    <p class="section-subtitle">
+      Tap a card to see a short history and details. You can switch language
+      (English / हिन्दी / ಕನ್ನಡ) and listen to the information using audio.
+    </p>
+
+    <div class="place-grid">
+      <button class="place-card" data-place="kaynes">
+        <img src="Tumbnails/kaynes.png" alt="Kaynes Technology Mysuru" class="place-thumb">
+        <span class="place-name-pill">Kaynes (Mysuru)</span>
+        <span class="place-location-mini">Industrial Visit · Mysuru</span>
+      </button>
+
+      <button class="place-card" data-place="infosys">
+        <img src="Thumbnails/infosys.png" alt="Infosys Campus Mysuru" class="place-thumb">
+        <span class="place-name-pill">Infosys Campus, Mysuru</span>
+        <span class="place-location-mini">Global Education Center</span>
+      </button>
+
+      <button class="place-card" data-place="krs">
+        <img src="Thumbnails/krs.png" alt="KRS Brindavan Garden" class="place-thumb">
+        <span class="place-name-pill">KRS Brindavan Garden</span>
+        <span class="place-location-mini">Tourist Attraction · Mysuru</span>
+      </button>
+
+      <button class="place-card" data-place="chamundi">
+        <img src="Thumbnails/temple.png" alt="Chamundi Hills" class="place-thumb">
+        <span class="place-name-pill">Chamundi Hills</span>
+        <span class="place-location-mini">Temple & Viewpoint</span>
+      </button>
+
+      <button class="place-card" data-place="lalitha">
+        <img src="Thumbnails/lalitha-palace.png" alt="Lalitha Mahal Palace" class="place-thumb">
+        <span class="place-name-pill">Lalitha Mahal</span>
+        <span class="place-location-mini">Heritage Palace · Mysuru</span>
+      </button>
+
+      <button class="place-card" data-place="mysorepalace">
+        <img src="Thumbnails/mysore-palace.png" alt="Mysore Palace" class="place-thumb">
+        <span class="place-name-pill">Mysore Palace</span>
+        <span class="place-location-mini">Royal Palace · Mysuru</span>
+      </button>
+
+      <button class="place-card" data-place="balmuri">
+        <img src="Thumbnails/balmuri_falls.png" alt="Balmuri Falls" class="place-thumb">
+        <span class="place-name-pill">Balmuri Falls</span>
+        <span class="place-location-mini">Scenic Spot · Cauvery</span>
+      </button>
+
+      <button class="place-card" data-place="srirangapatna">
+        <img src="Thumbnails/srirangpatna.png" alt="Srirangapatna" class="place-thumb">
+        <span class="place-name-pill">Srirangapatna</span>
+        <span class="place-location-mini">Historic Island Town</span>
+      </button>
+
+      <button class="place-card" data-place="channapatna">
+        <img src="Thumbnails/channapatna.png" alt="Channapatna" class="place-thumb">
+        <span class="place-name-pill">Channapatna</span>
+        <span class="place-location-mini">Toy Town · Ramanagara</span>
+      </button>
+
+      <button class="place-card" data-place="jqspiders">
+        <img src="Thumbnails/qspiders.png" alt="J & Q Spider Technologies Bengaluru" class="place-thumb">
+        <span class="place-name-pill">J &amp; Q Spider Technologies</span>
+        <span class="place-location-mini">Training Institute · Bengaluru</span>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- POPUP MODAL FOR VISITING PLACES -->
+<div id="placeModal" class="place-modal-overlay" aria-hidden="true">
+  <div class="place-modal" role="dialog" aria-modal="true" aria-labelledby="placeModalTitle">
+    <button class="place-modal-close" aria-label="Close popup">&times;</button>
+    <img id="placeModalImage" src="" alt="" class="place-modal-header-image">
+    <div class="place-modal-body">
+      <h3 id="placeModalTitle" class="place-modal-title"></h3>
+      <div id="placeModalLocation" class="place-location-tag"></div>
+
+      <div class="place-modal-controls">
+        <div class="lang-switch">
+          <button class="lang-btn active" data-lang="en">English</button>
+          <button class="lang-btn" data-lang="hi">हिन्दी</button>
+          <button class="lang-btn" data-lang="kn">ಕನ್ನಡ</button>
+        </div>
+        <button id="ttsBtn" class="tts-btn">
+          🔊 Listen
+        </button>
+      </div>
+
+      <p id="placeModalText" class="place-modal-text"></p>
+    </div>
+  </div>
+</div>
   <!-- INFO / INSTRUCTIONS -->
   <section id="info">
     <div class="container">
@@ -1204,5 +1510,392 @@
       if (event.target === modal) modal.style.display = "none";
     };
   </script>
+  <script>
+  // --- DATA FOR ALL 10 PLACES (EN / HI / KN) ---
+
+  const placeData = {
+    kaynes: {
+      name: "Kaynes Technology, Mysuru",
+      location: "📍 Hootagalli Industrial Area, Mysuru, Karnataka",
+      image: "images/kaynes-mysuru.jpg",
+      descriptions: {
+        en: `Kaynes Technology is an electronics manufacturing services (EMS) company
+that works on embedded systems, IoT devices and industrial electronics.
+During the visit students get to see how printed circuit boards are assembled,
+tested and packed for global customers. The facility in Mysuru follows lean
+manufacturing practices, ESD safe handling and strict quality standards.
+For engineering students this visit connects classroom topics like soldering,
+microcontrollers and testing equipment with a real production line.`,
+        hi: `केन्स टेक्नोलॉजी एक इलेक्ट्रॉनिक्स मैन्युफैक्चरिंग सर्विसेज (EMS) कंपनी है
+जहाँ एम्बेडेड सिस्टम, IoT डिवाइसेस और इंडस्ट्रियल इलेक्ट्रॉनिक्स बनाए जाते हैं।
+इस भ्रमण के दौरान छात्र यह देखते हैं कि प्रिंटेड सर्किट बोर्ड कैसे असेंबल,
+टेस्ट और पैक किये जाते हैं। मैसूरु प्लांट में लीन मैन्युफैक्चरिंग, ESD सुरक्षा
+और सख्त क्वालिटी स्टैंडर्ड अपनाए जाते हैं। इंजीनियरिंग छात्रों के लिए यह दौरा
+सोल्डरिंग, माइक्रोकंट्रोलर और टेस्टिंग जैसे क्लासरूम कॉन्सेप्ट को असली
+प्रोडक्शन लाइन से जोड़ता है।`,
+        kn: `ಕೇನ್ಸ್ ಟೆಕ್ನಾಲಜಿ ಎಂಬೆಡೆಡ್ ಸಿಸ್ಟಮ್, ಐಒಟಿ ಸಾಧನಗಳು ಮತ್ತು ಕೈಗಾರಿಕಾ
+ಇಲೆಕ್ಟ್ರಾನಿಕ್ಸ್ ತಯಾರು ಮಾಡುವ EMS ಕಂಪನಿಯಾಗಿದೆ. ಭೇಟಿಯ ಸಮಯದಲ್ಲಿ ವಿದ್ಯಾರ್ಥಿಗಳು
+ಪ್ರಿಂಟೆಡ್ ಸರ್ಕ್ಯೂಟ್ ಬೋರ್ಡ್‌ಗಳನ್ನು ಹೇಗೆ ಅಸೆಂಬಲ್, ಪರೀಕ್ಷೆ ಮತ್ತು ಪ್ಯಾಕ್ ಮಾಡುತ್ತಾರೆ
+ಎಂಬುದನ್ನು ನೇರವಾಗಿ ನೋಡಬಹುದು. ಮೈಸೂರು ಘಟಕದಲ್ಲಿ ಲೀನ್ ಮ್ಯಾನ್ಯುಫ್ಯಾಕ್ಚರಿಂಗ್,
+ESD ಸುರಕ್ಷತೆ ಮತ್ತು ಕಠಿಣ ಗುಣಮಟ್ಟದ ಮಾನದಂಡಗಳನ್ನು ಅನುಸರಿಸಲಾಗುತ್ತದೆ. ಇದು
+ಸೋಲ್ಡರಿಂಗ್, ಮೈಕ್ರೊಕಂಟ್ರೋಲರ್ ಮತ್ತು ಟೆಸ್ಟಿಂಗ್ ಸಾಧನಗಳನ್ನು ಕುರಿತು ಕಲಿತಿರುವ
+ಪಾಠಗಳನ್ನು ನೈಜ ಉತ್ಪಾದನಾ ರೇಖೆಗೆ ಸಂಪರ್ಕಿಸುತ್ತದೆ.`
+      }
+    },
+
+    infosys: {
+      name: "Infosys Global Education Center, Mysuru",
+      location: "📍 Hebbal Industrial Area, Mysuru, Karnataka",
+      image: "images/infosys-mysuru.jpg",
+      descriptions: {
+        en: `The Infosys campus in Mysuru is one of the largest corporate training
+centers in the world. Fresh graduates from across India spend several
+months here learning software engineering, project lifecycle and soft skills.
+The campus is known for its residential hostels, digital classrooms,
+innovation labs and beautifully planned infrastructure. Visiting this center
+helps students understand how large IT organizations train people, manage
+projects and maintain global standards.`,
+        hi: `मैसूरु स्थित इंफोसिस ग्लोबल एजुकेशन सेंटर दुनिया के सबसे बड़े कॉर्पोरेट
+ट्रेनिंग कैंपस में से एक है। देश भर के नए इंजीनियर यहाँ कई महीने तक
+सॉफ्टवेयर इंजीनियरिंग, प्रोजेक्ट लाइफसाइकिल और सॉफ्ट स्किल्स सीखते हैं।
+कैंपस में रेजिडेंशियल हॉस्टल, डिजिटल क्लासरूम, इनोवेशन लैब और सुंदर
+इंफ्रास्ट्रक्चर है। इस दौरे से छात्रों को समझ आता है कि बड़ी IT कंपनियाँ
+कर्मचारियों को कैसे प्रशिक्षित करती हैं और ग्लोबल स्टैंडर्ड को कैसे बनाए रखती हैं।`,
+        kn: `ಮೈಸೂರಿನ ಇನ್ಫೋಸಿಸ್ ಗ್ಲೋಬಲ್ ಎಜುಕೇಶನ್ ಸೆಂಟರ್ ವಿಶ್ವದ ಅತಿ ದೊಡ್ಡ ಕಾರ್ಪೊರೇಟ್
+ತರಬೇತಿ ಕೇಂದ್ರಗಳಲ್ಲಿ ಒಂದಾಗಿದೆ. ದೇಶದ ನಾನಾ ಭಾಗಗಳಿಂದ ಬಂದ ಹೊಸ ಎಂಜಿನಿಯರ್‌ಗಳು
+ಇಲ್ಲಿ ಕೆಲವು ತಿಂಗಳುಗಳ ಕಾಲ ಸಾಫ್ಟ್‌ವೇರ್ ಇಂಜಿನಿಯರಿಂಗ್, ಪ್ರಾಜೆಕ್ಟ್ ಲೈಫ್‌ಸೈಕಲ್
+ಮತ್ತು ಸಾಫ್ಟ್‌ಸ್ಕಿಲ್ಸ್ ಕಲಿಯುತ್ತಾರೆ. ಕ್ಯಾಂಪಸ್‌ನಲ್ಲಿ ವಸತಿ ವಸತಿಗಳು, ಡಿಜಿಟಲ್ ತರಗತಿಗಳು,
+ಇನ್ನೋವೇಷನ್ ಲ್ಯಾಬ್‌ಗಳು ಮತ್ತು ಸುಂದರ ಮೂಲಸೌಕರ್ಯ ಇದೆ. ಈ ಭೇಟಿಯಿಂದ ದೊಡ್ಡ IT
+ಸಂಸ್ಥೆಗಳು ತರಬೇತಿ, ಪ್ರಾಜೆಕ್ಟ್ ನಿರ್ವಹಣೆ ಮತ್ತು ಜಾಗತಿಕ ಮಾನದಂಡಗಳನ್ನು ಹೇಗೆ ಉಳಿಸುತ್ತವೆ
+ಎಂಬುದನ್ನು ವಿದ್ಯಾರ್ಥಿಗಳು ಅರಿಯುತ್ತಾರೆ.`
+      }
+    },
+
+    krs: {
+      name: "KRS Brindavan Garden",
+      location: "📍 Krishna Raja Sagara, near Mysuru, Karnataka",
+      image: "images/krs-brindavan.jpg",
+      descriptions: {
+        en: `The Brindavan Garden is built alongside the Krishna Raja Sagara dam on
+the river Cauvery. It is famous for its terraced lawns, musical fountain
+show and beautifully lit walkways in the evening. Students can observe how
+large irrigation projects become tourism spots and support the local
+economy. The garden also offers a relaxing break after technical sessions,
+with boating facilities and scenic views of the water spread.`,
+        hi: `ब्रिंदावन गार्डन कावेरी नदी पर बने कृष्णराज सागर बाँध के पास स्थित है।
+यह अपने टैरस लॉन, म्यूज़िकल फाउंटेन शो और शाम की रंगीन लाइटिंग के लिए
+मशहूर है। यहाँ छात्र देख सकते हैं कि कैसे सिंचाई परियोजनाएँ पर्यटन स्थल
+भी बन जाती हैं और स्थानीय अर्थव्यवस्था को सहारा देती हैं। तकनीकी सत्रों
+के बाद यह गार्डन बोटिंग और पानी के सुंदर नज़ारों के साथ एक आरामदायक
+ब्रेक देता है।`,
+        kn: `ಬೃಂದಾವನ ಉದ್ಯಾನ ಕಾವೇರಿ ನದಿಯ ಮೇಲೆ ನಿರ್ಮಿತವಾದ ಕೃಷ್ಟರಾಜ ಸಾಗರ ಆಣೆಕಟ್ಟಿನ
+ಬದಿಯಲ್ಲಿ ಇದೆ. ಹಂತ ಹಂತದ ತೋಟಗಳು, ಮ್ಯೂಸಿಕಲ್ ಫೌಂಟನ್ ಶೋ ಮತ್ತು ಸಂಜೆ ವೇಳೆಯ
+ಬೆಳಕಿನ ಅಲಂಕಾರ ಈ ಉದ್ಯಾನವನದ ವಿಶೇಷತೆ. ಇಲ್ಲಿ ವಿದ್ಯಾರ್ಥಿಗಳು ದೊಡ್ಡ ನೀರಾವರಿ
+ಯೋಜನೆಗಳು ಪ್ರವಾಸಿ ಕೇಂದ್ರಗಳಾಗುವುದು ಮತ್ತು ಸ್ಥಳೀಯ ಆರ್ಥಿಕತೆಯನ್ನು ಬೆಂಬಲಿಸುವುದನ್ನು
+ಅರ್ಥಮಾಡಿಕೊಳ್ಳಬಹುದು. ತಾಂತ್ರಿಕ ಸೆಷನ್‌ಗಳ ನಂತರ ಬೋಟಿಂಗ್ ಮತ್ತು ನೀರಿನ ಸುಂದರ
+ನೋಟಗಳೊಂದಿಗೆ ಇದು ವಿಶ್ರಾಂತಿಯನ್ನು ನೀಡುತ್ತದೆ.`
+      }
+    },
+
+    chamundi: {
+      name: "Chamundeshwari Temple & Chamundi Hills",
+      location: "📍 Chamundi Hills, Mysuru, Karnataka",
+      image: "images/chamundi-hills.jpg",
+      descriptions: {
+        en: `Chamundi Hills is a sacred hill overlooking the city of Mysuru. At the top
+is the Chamundeshwari temple dedicated to the goddess who is considered
+the protector of the region. The hill offers a panoramic view of the city,
+the palace and KRS backwaters on clear days. The long stairway, Nandi
+statue and surrounding forests make the visit both spiritual and scenic,
+giving students a glimpse of the cultural side of Karnataka.`,
+        hi: `चामुंडी हिल्स मैसूरु शहर के ऊपर स्थित एक पवित्र पहाड़ी है। शिखर पर
+चामुंडेश्वरी देवी का मंदिर है जिन्हें क्षेत्र की रक्षक माना जाता है। यहाँ से
+शहर, मैसूरु पैलेस और KRS बैकवाटर का सुंदर दृश्य दिखाई देता है। लंबी सीढ़ियाँ,
+नंदी की विशाल प्रतिमा और आसपास के जंगल इस यात्रा को आध्यात्मिक और
+सौंदर्यपूर्ण दोनों बनाते हैं, जिससे छात्रों को कर्नाटक की संस्कृति का
+करीब से अनुभव मिलता है।`,
+        kn: `ಚಾಮುಂಡಿ ಬೆಟ್ಟವು ಮೈಸೂರು ನಗರವನ್ನು ಮೇಲ್ನೋಟದಿಂದ ಕಾಣುವ ಪವಿತ್ರ ಗುಡ್ಡ.
+ಇದರ ಶಿಖರದಲ್ಲಿ ಪ್ರಾದೇಶಿಕ ರಕ್ಷಕಿ ಎಂದು ಕರೆಯಲ್ಪಡುವ ಚಾಮುಂಡೇಶ್ವರಿ ದೇವಿಯ
+ಮಂದಿರ ಇದೆ. ಇಲ್ಲಿ നിന്ന് ಮೈಸೂರು ನಗರ, ಅರಮನೆ ಮತ್ತು KRS ನೀರಿನ ನೋಟ ಅತ್ಯಂತ
+ಸುಂದರವಾಗಿ ಕಾಣುತ್ತದೆ. ದೀರ್ಘ ಮೆಟ್ಟಿಲುಗಳು, ದೊಡ್ಡ ನಂದಿ ಮೂರ್ತಿ ಮತ್ತು ಸುತ್ತಲಿನ
+ಕಾಡುಗಳು ಈ ಭೇಟಿ ಆತ್ಮೀಯ ಹಾಗೂ ಸೌಂದರ್ಯಮಯ ಅನುಭವವನ್ನು ನೀಡುತ್ತವೆ.`
+      }
+    },
+
+    lalitha: {
+      name: "Lalitha Mahal Palace",
+      location: "📍 Lalithadripura, Mysuru, Karnataka",
+      image: "images/lalitha-mahal.jpg",
+      descriptions: {
+        en: `Lalitha Mahal was built in the early 20th century as a guest palace for
+the Viceroy of India. Its architecture shows strong European influence with
+a central dome, tall pillars and long corridors. Today it functions as a
+heritage hotel, but the exterior still reflects the royal lifestyle of the
+Wadiyar dynasty. Visiting the palace helps students appreciate how history,
+architecture and tourism combine to preserve cultural landmarks.`,
+        hi: `ललिता महल को 20वीं शताब्दी की शुरुआत में भारत के वायसरॉय के लिए
+अतिथि महल के रूप में बनाया गया था। इसकी वास्तुकला में यूरोपीय शैली
+का असर दिखता है – ऊँचा गुंबद, लंबे कॉरिडोर और भव्य स्तंभ। आज यह एक
+हेरिटेज होटल के रूप में चलाया जाता है, लेकिन इसकी बाहरी बनावट अभी भी
+वाडियार राजघराने की शाही जीवनशैली को दर्शाती है। यह स्थल इतिहास,
+वास्तुकला और पर्यटन के मेल का अच्छा उदाहरण है।`,
+        kn: `ಲಲಿತ ಮಹಲ್ ಅನ್ನು 20ನೇ ಶತಮಾನದ ಪ್ರಾರಂಭದಲ್ಲಿ ಭಾರತದ ವೈಸ್ರಾಯರಿಗಾಗಿ
+ಅತಿಥಿ ಅರಮನೆಯಾಗಿ ನಿರ್ಮಿಸಲಾಯಿತು. ಯುರೋಪಿಯನ್ ಶೈಲಿಯ ಗೋಪುರ, ಉದ್ದವಾದ
+ಮಂಟಪಗಳು ಮತ್ತು ಭವ್ಯ ಸ್ತಂಭಗಳು ಇದರ ವಾಸ್ತುಶಿಲ್ಪದ ವಿಶೇಷತೆ. ಇತ್ತೀಚೆಗೆ ಇದು
+ಹೆರಿಟೇಜ್ ಹೋಟೆಲ್ ಆಗಿ ಕಾರ್ಯನಿರ್ವಹಿಸುತ್ತಿದ್ದರೂ ಹೊರಾಂಗಣ ಭಾಗವು ಇನ್ನೂ ವಾಡಿಯಾರ್
+ರಾಜವಂಶದ ಶಾಹಿ ಜೀವನಶೈಲಿಯನ್ನು ತೋರಿಸುತ್ತದೆ. ಈ ಭೇಟಿ ಇತಿಹಾಸ, ವಾಸ್ತುಶಿಲ್ಪ
+ಮತ್ತು ಪ್ರವಾಸೋದ್ಯಮದ ಸಂಯೋಜನೆಯನ್ನು ವಿದ್ಯಾರ್ಥಿಗಳಿಗೆ ಪರಿಚಯಿಸುತ್ತದೆ.`
+      }
+    },
+
+    mysorepalace: {
+      name: "Mysore Palace",
+      location: "📍 City Center, Mysuru, Karnataka",
+      image: "images/mysore-palace.jpg",
+      descriptions: {
+        en: `Mysore Palace is the official residence of the Wadiyar royal family and one
+of the most visited monuments in India. The palace is known for its
+illuminated façade, stained glass ceilings, carved doors and richly painted
+halls. The blend of Hindu, Islamic and European styles is called the Indo–
+Saracenic style. For students the palace demonstrates how art, engineering
+and planning come together in traditional architecture on a grand scale.`,
+        hi: `मैसूरु पैलेस वाडियार शाही परिवार का आधिकारिक महल है और भारत के सबसे
+लोकप्रिय पर्यटक स्थलों में से एक है। इसका नाइट इल्यूमिनेशन, रंगीन काँच
+की छतें, नक्काशीदार दरवाज़े और भव्य दरबार हाल इसकी खासियत हैं।
+हिंदू, इस्लामी और यूरोपीय शैलियों का मिश्रण यहाँ इंडो-सारासेनिक शैली के
+रूप में दिखाई देता है। यह महल छात्रों को दिखाता है कि कला, इंजीनियरिंग
+और प्लानिंग मिलकर पारंपरिक वास्तुकला को कितना भव्य बना सकती हैं।`,
+        kn: `ಮೈಸೂರು ಅರಮನೆಯು ವಾಡಿಯಾರ್ ರಾಜವಂಶದ ಅಧಿಕೃತ ನಿವಾಸವಾಗಿದ್ದು ಭಾರತದಲ್ಲಿ
+ಅತ್ಯಧಿಕವಾಗಿ ಭೇಟಿ ನೀಡಲಾಗುವ ಸ್ಮಾರಕಗಳಲ್ಲಿ ಒಂದಾಗಿದೆ. ರಾತ್ರಿ ಬೆಳಕಿನ ಅಲಂಕಾರ,
+ಕಲರ್ ಗ್ಲಾಸ್ ಸೀಲಿಂಗ್‌ಗಳು, ನವಿರಾದ ಬಾಗಿಲುಗಳು ಮತ್ತು ವಿಶಾಲ ದರ್ಬಾರ್ ಹಾಲ್‌ಗಳು
+ಇದರ ವೈಶಿಷ್ಟ್ಯ. ಹಿಂದೂ, ಇಸ್ಲಾಮಿಕ್ ಮತ್ತು ಯುರೋಪಿಯನ್ ಶೈಲಿಗಳ ಸಂಯೋಜನೆಯನ್ನು
+ಇಂಡೊ-ಸರಸೆನಿಕ್ ಶೈಲಿ ಎಂದು ಕರೆಯುತ್ತಾರೆ. ವಿದ್ಯಾರ್ಥಿಗಳಿಗಾಗಿ ಈ ಅರಮನೆ
+ಕಲೆ, ಇಂಜಿನಿಯರಿಂಗ್ ಮತ್ತು ಯೋಜನೆಗಳು ಒಟ್ಟಾಗಿ ಹೇಗೆ ಅದ್ಭುತ ವಾಸ್ತುಶಿಲ್ಪವನ್ನು
+ನಿರ್ಮಿಸುತ್ತವೆ ಎಂಬುದನ್ನು ತೋರಿಸುತ್ತದೆ.`
+      }
+    },
+
+    balmuri: {
+      name: "Balmuri Falls",
+      location: "📍 Cauvery River, near Mysuru, Karnataka",
+      image: "images/balmuri-falls.jpg",
+      descriptions: {
+        en: `Balmuri Falls is a man-made check dam across the Cauvery that creates a
+wide sheet of water flowing over a short drop. It is a popular shooting
+spot for films and a weekend hangout for locals and students. The gentle
+current and surrounding coconut groves make it look like a natural river
+beach. At the same time the site reminds visitors about safety near water
+bodies and the importance of responsible tourism.`,
+        hi: `बालमुरी फॉल्स कावेरी नदी पर बने एक छोटे बाँध के ऊपर बहते पानी से बना
+एक सुंदर जलप्रपात जैसा स्थल है। यह फिल्मों की शूटिंग और सप्ताहांत पर
+घूमने के लिए काफी लोकप्रिय है। हल्की धारा और चारों ओर के नारियल के पेड़
+इसे प्राकृतिक नदी-तट जैसा वातावरण देते हैं। साथ ही यह स्थान विद्यार्थियों को
+जल स्रोतों के पास सुरक्षा और जिम्मेदार पर्यटन की अहमियत भी याद दिलाता है।`,
+        kn: `ಬಾಲ್ಮುರಿ ಫಾಲ್ಸ್ ಕಾವೇರಿ ನದಿಯ ಮೇಲಿನ ಸಣ್ಣ ತಡೆ ಆಣೆಕಟ್ಟಿನ ಮೂಲಕ ರೂಪುಗೊಂಡ
+ವಿಶಾಲ ಜಲಪಾತದಂತ ಸ್ಥಳ. ಇದು ಚಲನಚಿತ್ರಗಳ ಶೂಟಿಂಗ್ ಮತ್ತು ವಾರಾಂತ್ಯದಲ್ಲಿ
+ವಿದ್ಯಾರ್ಥಿಗಳು ಹಾಗೂ ಸ್ಥಳೀಯರಿಗೆ ಜನಪ್ರಿಯ ವಿಶ್ರಾಂತಿ ತಾಣ. ಮೃದುವಾದ
+ನೀರಿನ ಹರಿವು ಮತ್ತು ಸುತ್ತಲಿನ ತೆಂಗಿನಮರ ತೋಟಗಳು ಇದನ್ನು ನೈಸರ್ಗಿಕ ನದಿ
+ಬೀಚ್‌ನಂತೆ ಕಾಣುವಂತೆ ಮಾಡುತ್ತವೆ. ಇದೇ ಸಮಯದಲ್ಲಿ ನೀರಿನ ತೀರದಲ್ಲಿ ಸುರಕ್ಷತೆ
+ಮತ್ತು ಜವಾಬ್ದಾರಿಯುತ ಪ್ರವಾಸಿ ನಡೆವಳಿಕೆಯ ಮಹತ್ವವನ್ನು ಜ್ಞಾಪಿಸುತ್ತದೆ.`
+      }
+    },
+
+    srirangapatna: {
+      name: "Srirangapatna",
+      location: "📍 Island town on the Cauvery, Mandya district",
+      image: "images/srirangapatna.jpg",
+      descriptions: {
+        en: `Srirangapatna is a historic island town associated with Tipu Sultan and the
+Mysuru kingdom. Important sites include the Ranganathaswamy temple,
+Tipu's summer palace, Dariya Daulat Bagh and the old fort walls. The town
+has seen several Anglo–Mysore wars and treaties that shaped South Indian
+history. Walking through its narrow streets and monuments helps students
+connect textbook history with real locations and structures.`,
+        hi: `श्रीरंगपट्टणम कावेरी नदी में स्थित एक ऐतिहासिक टापू नगर है जो टीपू सुल्तान
+और मैसूरु राज्य से जुड़ा हुआ है। यहाँ रंगनाथस्वामी मंदिर, टीपू का ग्रीष्मकालीन
+महल, दरिया दौलत बाग और किले की पुरानी दीवारें देखने को मिलती हैं। इस नगर
+ने एंग्लो-मैसूर युद्धों और अनेक संधियों को देखा है जिनसे दक्षिण भारत का
+इतिहास बना। इसकी गलियों और स्मारकों में घूमना छात्रों को किताबों में पढ़े
+इतिहास को वास्तविक स्थान से जोड़ने में मदद करता है।`,
+        kn: `ಶ್ರೀರಂಗಪಟ್ಟಣವು ಕಾವೇರಿ ನದಿಯ ಮಧ್ಯದಲ್ಲಿರುವ ಐತಿಹಾಸಿಕ ದ್ವೀಪ ಪಟ್ಟಣವಾಗಿದ್ದು
+ಟಿಪ್ಪು ಸುಲ್ತಾನ್ ಮತ್ತು ಮೈಸೂರು ಸಾಮ್ರಾಜ್ಯದೊಂದಿಗೆ ಒಡನಾಟ ಹೊಂದಿದೆ. ಇಲ್ಲಿ
+ರಂಗನಾಥಸ್ವಾಮಿ ದೇವಸ್ಥಾನ, ಟಿಪ್ಪುವಿನ ಬೇಸಿಗೆ ಅರಮನೆ, ದರಿಯಾ ದೌಲತ್ ಬಾಗ್ ಮತ್ತು
+ಹಳೆಯ ಕೋಟೆಯ ಗೋಡೆಗಳು ಪ್ರಮುಖ ಆಕರ್ಷಣೆಗಳು. ಹಲವು ಆಂಗ್ಲ–ಮೈಸೂರು ಯುದ್ಧಗಳು
+ಮತ್ತು ಒಪ್ಪಂದಗಳು ಇಲ್ಲಿ ನಡೆದಿದ್ದು ದಕ್ಷಿಣ ಭಾರತದ ಇತಿಹಾಸವನ್ನು ರೂಪಿಸಿದವು.
+ಈ ಪಟ್ಟಣದ ಬೀದಿಗಳಲ್ಲಿ ನಡೆಯುತ್ತಾ ಸ್ಮಾರಕಗಳನ್ನು ನೋಡುವುದರಿಂದ ಪಠ್ಯಪುಸ್ತಕದ
+ಇತಿಹಾಸವನ್ನು ನೈಜ ಸ್ಥಳಗಳೊಂದಿಗೆ ವಿದ್ಯಾರ್ಥಿಗಳು ಸಂಪರ್ಕಿಸಬಹುದು.`
+      }
+    },
+
+    channapatna: {
+      name: "Channapatna – Toy Town",
+      location: "📍 Ramanagara district, between Mysuru and Bengaluru",
+      image: "images/channapatna-toys.jpg",
+      descriptions: {
+        en: `Channapatna is popularly called the Toy Town of Karnataka. Artisans here
+make colourful wooden toys and handicrafts using traditional lac-turnery
+techniques. The toys are usually made from hale (ivory) wood and coloured
+with natural dyes, making them safe for children. A visit introduces
+students to rural entrepreneurship, small-scale industry and the way
+geographical indication (GI) tags protect local crafts in the global market.`,
+        hi: `चन्नपट्टणम को कर्नाटक का "टॉय टाउन" कहा जाता है। यहाँ के कारीगर पारंपरिक
+लाख-काम (lac turnery) तकनीक से रंग-बिरखे लकड़ी के खिलौने और हस्तशिल्प
+बनाते हैं। आमतौर पर ये खिलौने हले (आइवरी) लकड़ी से बनते हैं और प्राकृतिक
+रंगों से रंगे जाते हैं, इसलिए बच्चों के लिए सुरक्षित माने जाते हैं। यह यात्रा
+ग्रामीण उद्यमिता, लघु उद्योग और भौगोलिक संकेत (GI टैग) के माध्यम से
+स्थानीय कला की वैश्विक सुरक्षा जैसे विषयों से परिचय कराती है।`,
+        kn: `ಚನ್ನಪಟ್ಟಣವನ್ನು ಕರ್ನಾಟಕದ "ಟಾಯ್ ಟೌನ್" ಎಂದು ಕರೆಯಲಾಗುತ್ತದೆ. ಇಲ್ಲಿನ
+ಶಿಲ್ಪಿಗಳು ಸಾಂಪ್ರದಾಯಿಕ ಲಾಕ್ ಟರ್ನರಿ ತಂತ್ರದ ಮೂಲಕ ಬಣ್ಣ ಬಣ್ಣದ ಮರದ
+ಆಟಿಕೆಗಳು ಮತ್ತು ಹಸ್ತಶಿಲ್ಪಗಳನ್ನು ತಯಾರಿಸುತ್ತಾರೆ. ಸಾಮಾನ್ಯವಾಗಿ ಹಳೆ ಮರದಿಂದ
+ಮಾಡುವ ಈ ಆಟಿಕೆಗಳಿಗೆ ನೈಸರ್ಗಿಕ ಬಣ್ಣಗಳನ್ನು ಬಳಸಿ ಮಗುಗಳಿಗೆ ಸುರಕ್ಷಿತವಾಗಿರುವಂತೆ
+ಮಾಡಲಾಗುತ್ತದೆ. ಈ ಭೇಟಿ ಗ್ರಾಮೀಣ ಉದ್ಯಮಿತ್ವ, ಸಣ್ಣ ಕೈಗಾರಿಕೆ ಮತ್ತು ಭೌಗೋಳಿಕ
+ಸೂಚನೆ (GI ಟ್ಯಾಗ್)ಗಳು ಸ್ಥಳೀಯ ಕೌಶಲ್ಯವನ್ನು ಜಾಗತಿಕ ಮಾರುಕಟ್ಟೆಯಲ್ಲಿ ಹೇಗೆ
+ರಕ್ಷಿಸುತ್ತವೆ ಎಂಬುದನ್ನು ಪರಿಚಯಿಸುತ್ತದೆ.`
+      }
+    },
+
+    jqspiders: {
+      name: "J & Q Spider Technologies, Bengaluru",
+      location: "📍 Bengaluru, Karnataka",
+      image: "images/jqspiders-bengaluru.jpg",
+      descriptions: {
+        en: `J & Q Spider Technologies is a popular training institute focusing on
+software development, testing and interview preparation. Students are
+exposed to practical coding exercises, project assignments and mock
+interviews that mirror real hiring processes. The visit helps participants
+understand the skill expectations of the IT industry, the importance of
+continuous learning and how structured training can bridge the gap between
+college curriculum and job-ready competence.`,
+        hi: `जे & क्यू स्पाइडर टेक्नोलॉजीज़ एक प्रसिद्ध ट्रेनिंग इंस्टीट्यूट है जहाँ
+सॉफ्टवेयर डेवलपमेंट, टेस्टिंग और इंटरव्यू प्रिपरेशन पर विशेष ध्यान दिया
+जाता है। यहाँ विद्यार्थियों को प्रैक्टिकल कोडिंग, प्रोजेक्ट असाइनमेंट और
+मॉक इंटरव्यू के माध्यम से वास्तविक भर्ती प्रक्रिया का अनुभव कराया जाता है।
+यह भ्रमण छात्रों को IT इंडस्ट्री की स्किल अपेक्षाएँ, लगातार सीखते रहने की
+जरूरत और स्ट्रक्चर्ड ट्रेनिंग के माध्यम से जॉब-रेडी बनने का महत्व समझाता है।`,
+        kn: `ಜೆ & ಕ್ಯೂ ಸ್ಪೈಡರ್ ಟೆಕ್ನಾಲಜೀಸ್ ಸಾಫ್ಟ್‌ವೇರ್ ಡೆವಲಪ್‌ಮೆಂಟ್, ಟೆಸ್ಟಿಂಗ್ ಮತ್ತು
+ಇಂಟರ್ವ್ಯೂ ತಯಾರಿಕೆಗೆ ಒತ್ತು ನೀಡುವ ಪ್ರಸಿದ್ಧ ತರಬೇತಿ ಸಂಸ್ಥೆ. ಇಲ್ಲಿ ವಿದ್ಯಾರ್ಥಿಗಳು
+ಪ್ರಾಕ್ಟಿಕಲ್ ಕೋಡಿಂಗ್ ವ್ಯಾಯಾಮಗಳು, ಪ್ರಾಜೆಕ್ಟ್ ಅಸೈನ್‌ಮೆಂಟ್‌ಗಳು ಮತ್ತು
+ನೈಜ ನೇಮಕಾತಿ ಪ್ರಕ್ರಿಯೆಯನ್ನು ಹೋಲುವ ಮಾಕ್ ಇಂಟರ್ವ್ಯೂಗಳನ್ನು ಅನುಭವಿಸುತ್ತಾರೆ.
+ಈ ಭೇಟಿಯಿಂದ IT ಉದ್ಯಮದ ಕೌಶಲ್ಯ ನಿರೀಕ್ಷೆಗಳು, ನಿರಂತರ ಕಲಿಕೆಯ ಅಗತ್ಯತೆ ಮತ್ತು
+ಸಂಯೋಜಿತ ತರಬೇತಿ ಕಾಲೇಜು ಪಠ್ಯಕ್ರಮ ಮತ್ತು ಉದ್ಯೋಗಕ್ಕೆ ತಯಾರಾಗುವ ಸಾಮರ್ಥ್ಯದ
+ನಡುವಿನ ಅಂತರವನ್ನು ಹೇಗೆ ಕಡಿಮೆ ಮಾಡುತ್ತದೆ ಎಂಬುದನ್ನು ತಿಳಿದುಕೊಳ್ಳಬಹುದು.`
+      }
+    }
+  };
+
+  // --- POPUP HANDLING, LANGUAGE SWITCH & TEXT-TO-SPEECH ---
+
+  const modalOverlay = document.getElementById("placeModal");
+  const modalImage = document.getElementById("placeModalImage");
+  const modalTitle = document.getElementById("placeModalTitle");
+  const modalLocation = document.getElementById("placeModalLocation");
+  const modalText = document.getElementById("placeModalText");
+  const closeBtn = modalOverlay.querySelector(".place-modal-close");
+  const langButtons = modalOverlay.querySelectorAll(".lang-btn");
+  const ttsBtn = document.getElementById("ttsBtn");
+
+  let currentPlaceId = null;
+  let currentLang = "en";
+
+  function openPlaceModal(placeId) {
+    const data = placeData[placeId];
+    if (!data) return;
+
+    currentPlaceId = placeId;
+    currentLang = "en";
+
+    modalImage.src = data.image;
+    modalImage.alt = data.name;
+    modalTitle.textContent = data.name;
+    modalLocation.textContent = data.location;
+    modalText.textContent = data.descriptions[currentLang];
+
+    langButtons.forEach(btn => {
+      btn.classList.toggle("active", btn.dataset.lang === currentLang);
+    });
+
+    modalOverlay.classList.add("active");
+    modalOverlay.setAttribute("aria-hidden", "false");
+  }
+
+  function closePlaceModal() {
+    window.speechSynthesis.cancel();
+    modalOverlay.classList.remove("active");
+    modalOverlay.setAttribute("aria-hidden", "true");
+  }
+
+  document.querySelectorAll(".place-card").forEach(card => {
+    card.addEventListener("click", () => {
+      const id = card.getAttribute("data-place");
+      openPlaceModal(id);
+    });
+  });
+
+  closeBtn.addEventListener("click", closePlaceModal);
+
+  modalOverlay.addEventListener("click", (e) => {
+    if (e.target === modalOverlay) closePlaceModal();
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && modalOverlay.classList.contains("active")) {
+      closePlaceModal();
+    }
+  });
+
+  langButtons.forEach(btn => {
+    btn.addEventListener("click", () => {
+      if (!currentPlaceId) return;
+      const lang = btn.dataset.lang;
+      currentLang = lang;
+
+      const data = placeData[currentPlaceId];
+      modalText.textContent = data.descriptions[lang];
+
+      langButtons.forEach(b => b.classList.toggle("active", b === btn));
+
+      // Stop any existing speech when language changes
+      window.speechSynthesis.cancel();
+    });
+  });
+
+  // Simple Text-to-Speech using Web Speech API
+  function speakCurrentText() {
+    if (!currentPlaceId) return;
+    const data = placeData[currentPlaceId];
+    const text = data.descriptions[currentLang];
+
+    if (!("speechSynthesis" in window)) {
+      alert("Text-to-speech is not supported in this browser.");
+      return;
+    }
+
+    window.speechSynthesis.cancel();
+
+    const utterance = new SpeechSynthesisUtterance(text);
+
+    const langMap = {
+      en: "en-IN",
+      hi: "hi-IN",
+      kn: "kn-IN"
+    };
+    utterance.lang = langMap[currentLang] || "en-IN";
+
+    // try to pick a matching voice if available
+    const voices = window.speechSynthesis.getVoices();
+    const voice = voices.find(v => v.lang === utterance.lang) ||
+                  voices.find(v => v.lang.startsWith(utterance.lang.split("-")[0]));
+    if (voice) utterance.voice = voice;
+
+    window.speechSynthesis.speak(utterance);
+  }
+
+  ttsBtn.addEventListener("click", speakCurrentText);
+
+  // Some browsers load voices asynchronously
+  if ("speechSynthesis" in window) {
+    window.speechSynthesis.onvoiceschanged = () => {};
+  }
+</script>
 </body>
 </html>
