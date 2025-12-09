@@ -1493,28 +1493,43 @@ place-location-tag::before {    /* NEW: map pin icon via CSS */
         © 2025 CSE &amp; AIML Department, REC Hulkoti. Designed by Shahid Attar for the 3-Day Industrial Visit.
       </p>
     </div>
+    <!-- IMAGE POPUP MODAL -->
+<div id="imageModal" class="modal">
+  <span class="close">&times;</span>
+  <img id="popupImage" class="modal-content" alt="Faculty photo">
+</div>
   </footer>
 
   <!-- IMAGE POPUP MODAL -->
 <script>
-  const imageModal = document.getElementById("imageModal");
-  const popupImage = document.getElementById("popupImage");
-  const imageCloseBtn = document.querySelector("#imageModal .close");
+  document.addEventListener("DOMContentLoaded", () => {
+    const imageModal   = document.getElementById("imageModal");
+    const popupImage   = document.getElementById("popupImage");
+    const imageCloseBtn = imageModal ? imageModal.querySelector(".close") : null;
 
-  document.querySelectorAll(".open-image").forEach(link => {
-    link.addEventListener("click", function (e) {
-      e.preventDefault();
-      const imgSrc = this.getAttribute("data-img");
-      popupImage.src = imgSrc;
-      imageModal.style.display = "block";
+    if (!imageModal || !popupImage || !imageCloseBtn) return;
+
+    document.querySelectorAll(".open-image").forEach(link => {
+      link.addEventListener("click", (e) => {
+        e.preventDefault();
+        const imgSrc = link.getAttribute("data-img");
+        popupImage.src = imgSrc;
+        imageModal.style.display = "block";
+      });
+    });
+
+    imageCloseBtn.addEventListener("click", () => {
+      imageModal.style.display = "none";
+      popupImage.src = "";
+    });
+
+    window.addEventListener("click", (event) => {
+      if (event.target === imageModal) {
+        imageModal.style.display = "none";
+        popupImage.src = "";
+      }
     });
   });
-
-  imageCloseBtn.onclick = () => imageModal.style.display = "none";
-
-  window.onclick = (event) => {
-    if (event.target === imageModal) imageModal.style.display = "none";
-  };
 </script>
   <script>
   // --- DATA FOR ALL 10 PLACES (EN / HI / KN) ---
