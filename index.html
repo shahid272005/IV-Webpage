@@ -217,7 +217,17 @@
   background: #eff6ff;
   color: #1f2937;
   margin-bottom: 0.8rem;
+  cursor: pointer;              /* NEW: show it's clickable */
+  transition: background 0.15s, transform 0.1s;
 }
+place-location-tag::before {    /* NEW: map pin icon via CSS */
+  content: "📍";
+}
+
+.place-location-tag:hover {      /* NEW: small hover feedback */
+  background: #dbeafe;
+  transform: translateY(-1px);
+}    
 
 .place-modal-controls {
   display: flex;
@@ -1778,6 +1788,19 @@ college curriculum and job-ready competence.`,
       }
     }
   };
+  // Google Maps URLs for each visiting place
+const placeMaps = {
+  kaynes: "https://www.google.com/maps/search/?api=1&query=Kaynes+Technology+Mysuru",
+  infosys: "https://www.google.com/maps/search/?api=1&query=Infosys+Global+Education+Center+Mysuru",
+  krs: "https://www.google.com/maps/search/?api=1&query=Brindavan+Gardens+KRS+Mysuru",
+  chamundi: "https://www.google.com/maps/search/?api=1&query=Chamundeshwari+Temple+Chamundi+Hills+Mysuru",
+  lalitha: "https://www.google.com/maps/search/?api=1&query=Lalitha+Mahal+Palace+Mysuru",
+  mysorepalace: "https://www.google.com/maps/search/?api=1&query=Mysore+Palace+Mysuru",
+  balmuri: "https://www.google.com/maps/search/?api=1&query=Balmuri+Falls+Mysuru",
+  srirangapatna: "https://www.google.com/maps/search/?api=1&query=Srirangapatna+Mandya",
+  channapatna: "https://www.google.com/maps/search/?api=1&query=Channapatna+Toy+Town+Ramanagara",
+  jqspiders: "https://www.google.com/maps/search/?api=1&query=QSpiders+Basavanagudi+Bengaluru"
+};  
 
   // --- POPUP HANDLING, LANGUAGE SWITCH & TEXT-TO-SPEECH ---
 
@@ -1792,19 +1815,23 @@ college curriculum and job-ready competence.`,
 
   let currentPlaceId = null;
   let currentLang = "en";
-
-  function openPlaceModal(placeId) {
+    
+    function openPlaceModal(placeId, imageSrcFromCard) {
     const data = placeData[placeId];
     if (!data) return;
 
     currentPlaceId = placeId;
     currentLang = "en";
 
-    modalImage.src = data.image;
+    // Prefer the thumbnail from the clicked card; fall back to data.image
+    modalImage.src = imageSrcFromCard || data.image;
     modalImage.alt = data.name;
     modalTitle.textContent = data.name;
     modalLocation.textContent = data.location;
     modalText.textContent = data.descriptions[currentLang];
+    // attach map URL to the pill
+const mapUrl = placeMaps[placeId];
+modalLocation.dataset.mapUrl = mapUrl || "";  
 
     langButtons.forEach(btn => {
       btn.classList.toggle("active", btn.dataset.lang === currentLang);
@@ -1820,13 +1847,14 @@ college curriculum and job-ready competence.`,
     modalOverlay.setAttribute("aria-hidden", "true");
   }
 
-  document.querySelectorAll(".place-card").forEach(card => {
-    card.addEventListener("click", () => {
-      const id = card.getAttribute("data-place");
-      openPlaceModal(id);
-    });
+document.querySelectorAll(".place-card").forEach(card => {
+  card.addEventListener("click", () => {
+    const id = card.getAttribute("data-place");
+    const thumbImg = card.querySelector(".place-thumb");
+    const thumbSrc = thumbImg ? thumbImg.src : null;
+    openPlaceModal(id, thumbSrc);
   });
-
+});
   placeCloseBtn.addEventListener("click", closePlaceModal);
 
   modalOverlay.addEventListener("click", (e) => {
@@ -1854,6 +1882,13 @@ college curriculum and job-ready competence.`,
       window.speechSynthesis.cancel();
     });
   });
+  // Clicking the location pill opens Google Maps in a new tab
+modalLocation.addEventListener("click", () => {
+  const url = modalLocation.dataset.mapUrl;
+  if (url) {
+    window.open(url, "_blank");
+  }
+});  
 
   // Simple Text-to-Speech using Web Speech API
   function speakCurrentText() {
